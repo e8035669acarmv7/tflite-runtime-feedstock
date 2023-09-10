@@ -1,0 +1,53 @@
+c_compiler:
+  - gcc
+
+c_compiler_version:
+  - "12"
+
+channel_sources:
+  - conda-forge
+
+channel_targets:
+  - conda-forge main
+
+cxx_compiler:
+  - gxx
+
+cxx_compiler_version:
+  - "12"
+
+cdt_name:
+  - cos7
+
+cdt_arch:
+  - armv7l
+
+BUILD:
+  - "armv7-conda_cos7-linux-gnueabihf"
+# _sysconfigdata__linux_arm-linux-gnueabihf
+
+python:
+  - '3.11'
+  - '3.10'
+  - '3.9'
+  - '3.8'
+python_impl:
+  - cpython
+  - cpython
+  - cpython
+  - cpython
+numpy:
+  - '1.24'
+
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+
+target_platform:
+  - linux-armv7l
+
+zip_keys:
+  - - python
+    - python_impl
+

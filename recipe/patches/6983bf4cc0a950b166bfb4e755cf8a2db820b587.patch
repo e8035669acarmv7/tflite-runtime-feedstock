@@ -1,0 +1,38 @@
+From 6983bf4cc0a950b166bfb4e755cf8a2db820b587 Mon Sep 17 00:00:00 2001
+From: Terry Heo <terryheo@google.com>
+Date: Wed, 15 Feb 2023 23:04:25 -0800
+Subject: [PATCH] lite: Update CMakeLists.txt
+
+To fix undefined symbol: _ZN6tflite9telemetry20TelemetryReportEventEP13TfLiteContextPKc12TfLiteStatus
+This PR resolves #59631
+
+PiperOrigin-RevId: 510050310
+---
+ tensorflow/lite/CMakeLists.txt         | 1 +
+ tensorflow/lite/kernels/CMakeLists.txt | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tensorflow/lite/CMakeLists.txt b/tensorflow/lite/CMakeLists.txt
+index c71a3925ac639..39591a3bd76c6 100644
+--- a/tensorflow/lite/CMakeLists.txt
++++ b/tensorflow/lite/CMakeLists.txt
+@@ -493,6 +493,7 @@ set(TFLITE_PROFILER_SRCS
+   ${TFLITE_SOURCE_DIR}/profiling/root_profiler.h
+   ${TFLITE_SOURCE_DIR}/profiling/root_profiler.cc
+   ${TFLITE_SOURCE_DIR}/profiling/telemetry/profiler.cc
++  ${TFLITE_SOURCE_DIR}/profiling/telemetry/telemetry.cc
+ )
+ if(CMAKE_SYSTEM_NAME MATCHES "Android")
+   list(APPEND TFLITE_PROFILER_SRCS
+diff --git a/tensorflow/lite/kernels/CMakeLists.txt b/tensorflow/lite/kernels/CMakeLists.txt
+index 46c80713ddfb5..2b5d1fe14249d 100644
+--- a/tensorflow/lite/kernels/CMakeLists.txt
++++ b/tensorflow/lite/kernels/CMakeLists.txt
+@@ -84,7 +84,6 @@ set(TEST_FRAMEWORK_SRC
+   ${TFLITE_SOURCE_DIR}/delegates/nnapi/acceleration_test_list.cc
+   ${TFLITE_SOURCE_DIR}/delegates/nnapi/acceleration_test_util.cc
+   ${TFLITE_SOURCE_DIR}/profiling/memory_info.cc
+-  ${TFLITE_SOURCE_DIR}/profiling/telemetry/telemetry.cc
+   ${TFLITE_SOURCE_DIR}/schema/schema_conversion_utils.cc
+   ${TFLITE_SOURCE_DIR}/tools/command_line_flags.cc
+   ${DELEGATE_PROVIDERS}

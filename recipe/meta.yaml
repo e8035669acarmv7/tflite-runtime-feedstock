@@ -1,0 +1,49 @@
+{% set version = "2.12.0" %}
+
+package:
+  name: tflite-runtime
+  version: {{ version }}
+
+source:
+  # git_url: https://github.com/tensorflow/tensorflow.git
+  # git_rev: v{{ version }}
+  # git_depth: 1
+  url: https://github.com/tensorflow/tensorflow/archive/refs/tags/v{{ version }}.tar.gz
+  patches:
+      # https://github.com/tensorflow/tensorflow/commit/6983bf4cc0a950b166bfb4e755cf8a2db820b587
+    - patches/6983bf4cc0a950b166bfb4e755cf8a2db820b587.patch
+
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - python
+    - setuptools >60
+    - numpy
+    - cmake
+    - ninja
+    - pkg-config
+  host:
+    - python
+    - setuptools >60
+    - pybind11
+    - numpy
+    # - libcurl
+    # - openssl
+    # - libabseil
+
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - tflite_runtime
+    - tflite_runtime.interpreter
+
+about:
+  home: https://tensorflow.org/
